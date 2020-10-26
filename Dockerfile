@@ -55,10 +55,8 @@ RUN docker-php-ext-install pdo_pgsql
 # Install the PHP gd library
 RUN docker-php-ext-install gd && \
     docker-php-ext-configure gd \
-        --enable-gd-native-ttf \
         --with-jpeg-dir=/usr/lib \
-        --with-freetype-dir=/usr/include/freetype2 && \
-    docker-php-ext-install gd
+        --with-freetype-dir=/usr/include/freetype2
 
 #####################################
 # xDebug:
@@ -92,6 +90,9 @@ RUN curl -s http://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer
 # Source the bash
 RUN . ~/.bashrc
+
+# Force composer v1
+RUN composer self-update --1
 
 #####################################
 # Drush:
