@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:7.4-fpm
 
 MAINTAINER simone@cyber-duck.co.uk
 
@@ -55,9 +55,7 @@ RUN docker-php-ext-install pdo_pgsql
 
 # Install the PHP gd library
 RUN docker-php-ext-install gd && \
-    docker-php-ext-configure gd \
-        --with-jpeg-dir=/usr/lib \
-        --with-freetype-dir=/usr/include/freetype2 && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd
 
 #####################################
