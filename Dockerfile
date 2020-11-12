@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.3-fpm
 
 MAINTAINER simone@cyber-duck.co.uk
 
@@ -8,6 +8,7 @@ RUN apt-get update && \
     apt-get install -y --assume-yes --no-install-recommends \
         apt-utils \
         zlib1g-dev libicu-dev g++ \
+        libzip-dev \
         libz-dev \
         libpq-dev \
         libjpeg-dev \
@@ -55,7 +56,6 @@ RUN docker-php-ext-install pdo_pgsql
 # Install the PHP gd library
 RUN docker-php-ext-install gd && \
     docker-php-ext-configure gd \
-        --enable-gd-native-ttf \
         --with-jpeg-dir=/usr/lib \
         --with-freetype-dir=/usr/include/freetype2 && \
     docker-php-ext-install gd
